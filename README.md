@@ -10,13 +10,13 @@
 
 ## Структура таблицы
 ![table_example](https://github.com/v-makarov-code/ETL-pipeline-airflow/blob/main/table_example.png)
-Дата - event_date
-Название среза - dimension
-Значение среза - dimension_value
-Число просмотров - views
-Число лайков - likes
-Число полученных сообщений - messages_received
-Число отправленных сообщений - messages_sent
-От скольких пользователей получили сообщения - users_received
-Скольким пользователям отправили сообщение - users_sent
-Срез — это os, gender и age
+- Дата - event_date
+- Название среза - dimension
+- Значение среза - dimension_value
+- Число просмотров - views
+- Число лайков - likes
+- Число полученных сообщений - messages_received
+- Число отправленных сообщений - messages_sent
+- От скольких пользователей получили сообщения - users_received
+- Скольким пользователям отправили сообщение - users_sent
+- Срез — это os, gender и age

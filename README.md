@@ -1,15 +1,23 @@
 # Построение ETL-пайплайна
 
+## Описание проекта
+
+**Цель:** Разработка ETL-пайплайна через построение DAG в airflow, который будет считаться каждый день за вчера. 
+
 ## Методология
-![dag](https://github.com/v-makarov-code/ETL-pipeline-airflow/blob/main/Airflow_dag_table_update.png)
-- Параллельно обрабатывается две таблицы. В feed_actions для каждого юзера посчитаем число просмотров и лайков контента. В message_actions для каждого юзера считаем, сколько он получает и отсылает сообщений, скольким людям он пишет, сколько людей пишут ему. Каждая выгрузка в отдельном таске.
+![dag](https://github.com/v-makarov-code/ETL-pipeline-airflow/blob/main/Airflow_dag_table_update.png)  
+*Рис.1 Структура DAG*  
+
+- Параллельно обрабатывается две таблицы. В feed_actions для каждого юзера посчитаем число просмотров и лайков контента. В message_actions для каждого юзера считаем, сколько он получает и рассылает сообщений, скольким людям он пишет, сколько людей пишут ему. Каждая выгрузка в отдельном таске.
 - Объединяем две таблицы в одну.
 - Для этой таблицы считаем все эти метрики в разрезе по полу, возрасту и ос. Три разных таска на каждый срез.
 - И финальные данные со всеми метриками записываем в отдельную таблицу в ClickHouse.
 - Каждый день таблица дополняться новыми данными.
 
 ## Структура таблицы
-![table_example](https://github.com/v-makarov-code/ETL-pipeline-airflow/blob/main/table_example.png)
+![table_example](https://github.com/v-makarov-code/ETL-pipeline-airflow/blob/main/table_example.png)   
+*Рис.2. Пример таблицы, получаемой на выходе*  
+
 - Дата - event_date
 - Название среза - dimension
 - Значение среза - dimension_value
@@ -20,3 +28,9 @@
 - От скольких пользователей получили сообщения - users_received
 - Скольким пользователям отправили сообщение - users_sent
 - Срез — это os, gender и age
+
+## Стек 
+
+- Python 3.13(numpy, pandas, airflow)
+- Apache Airflow 2.2.4
+- ClickHouse
